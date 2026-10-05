@@ -3,6 +3,8 @@ import sqlite3
 
 app = Flask(__name__)
 
+from criar_banco import *
+
 def conectar_banco():
     conn = sqlite3.connect("banco.db")
     conn.row_factory = sqlite3.Row
