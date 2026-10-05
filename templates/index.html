@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ResolveJá</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+            color: #222;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 32px;
+        }
+
+        header p {
+            margin-top: 8px;
+            color: #d1d5db;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            padding: 25px 18px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        h2 {
+            margin-bottom: 15px;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 14px;
+            margin-top: 10px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 12px;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: #2563eb;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .profissional {
+            background: white;
+            padding: 18px;
+            margin-bottom: 12px;
+            border-radius: 15px;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.06);
+        }
+
+        .info {
+            margin-top: 8px;
+            color: #555;
+        }
+
+        .preco {
+            margin-top: 8px;
+            font-weight: bold;
+        }
+
+        .contato {
+            background: #16a34a;
+        }
+
+        .titulo {
+            margin: 28px 0 15px;
+        }
+
+        .vazio {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            color: #666;
+        }
+
+        #resultados,
+        #cadastro {
+            display: none;
+        }
+
+        .voltar {
+            background: #6b7280;
+        }
+
+        .sucesso {
+            background: #dcfce7;
+            color: #166534;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>ResolveJá</h1>
+    <p>Encontre quem resolve.</p>
+</header>
+
+<div class="container">
+
+    <!-- BUSCA -->
+
+    <div id="inicio">
+
+        <div class="card">
+
+            <h2>O que você precisa?</h2>
+
+            <input
+                id="busca"
+                type="text"
+                placeholder="Ex: eletricista, faxina, pintura..."
+            >
+
+            <button onclick="buscar()">
+                🔎 Buscar profissional
+            </button>
+
+        </div>
+
+        <div class="card">
+
+            <h2>👷 É profissional?</h2>
+
+            <p>
+                Cadastre seus serviços no ResolveJá
+                e encontre novos clientes.
+            </p>
+
+            <button onclick="abrirCadastro()">
+                Quero oferecer meus serviços
+            </button>
+
+        </div>
+
+        <h2 class="titulo">
+            Serviços populares
+        </h2>
+
+        <div class="card">
+            🔧 <strong>Eletricista</strong>
+            <p>Serviços elétricos.</p>
+        </div>
+
+        <div class="card">
+            🧹 <strong>Limpeza</strong>
+            <p>Limpeza residencial e comercial.</p>
+        </div>
+
+        <div class="card">
+            🎨 <strong>Pintura</strong>
+            <p>Pintura e acabamento.</p>
+        </div>
+
+        <div class="card">
+            🔨 <strong>Pedreiro</strong>
+            <p>Obras e reformas.</p>
+        </div>
+
+    </div>
+
+
+    <!-- RESULTADOS -->
+
+    <div id="resultados">
+
+        <h2>Profissionais encontrados</h2>
+
+        <div id="lista"></div>
+
+        <button class="voltar" onclick="voltarInicio()">
+            ← Voltar
+        </button>
+
+    </div>
+
+
+    <!-- CADASTRO -->
+
+    <div id="cadastro">
+
+        <div class="card">
+
+            <h2>👷 Cadastro profissional</h2>
+
+            <p>
+                Preencha seus dados para criar
+                seu perfil no ResolveJá.
+            </p>
+
+            <input
+                id="nome"
+                type="text"
+                placeholder="Seu nome"
+            >
+
+            <select id="servico">
+
+                <option value="">
+                    Escolha sua profissão
+                </option>
+
+                <option>Eletricista</option>
+                <option>Pedreiro</option>
+                <option>Pintor</option>
+                <option>Limpeza</option>
+                <option>Encanador</option>
+                <option>Jardineiro</option>
+                <option>Montador</option>
+                <option>Outro</option>
+
+            </select>
+
+            <input
+                id="cidade"
+                type="text"
+                placeholder="Cidade / região"
+            >
+
+            <input
+                id="preco"
+                type="number"
+                placeholder="Preço inicial (R$)"
+            >
+
+            <input
+                id="telefone"
+                type="tel"
+                placeholder="WhatsApp"
+            >
+
+            <textarea
+                id="descricao"
+                placeholder="Conte um pouco sobre seu serviço..."
+            ></textarea>
+
+            <button onclick="cadastrar()">
+                Criar meu perfil
+            </button>
+
+            <div id="sucesso" class="sucesso">
+                ✅ Perfil criado com sucesso!
+            </div>
+
+            <button class="voltar" onclick="voltarInicio()">
+                ← Voltar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let profissionais = {{ profissionais | tojson }};
+
+
+function buscar() {
+
+    const texto =
+        document.getElementById("busca")
+        .value
+        .toLowerCase()
+        .trim();
+
+    const lista =
+        document.getElementById("lista");
+
+    lista.innerHTML = "";
+
+    if (texto === "") {
+
+        alert("Digite o serviço que você procura.");
+
+        return;
+    }
+
+    const encontrados =
+        profissionais.filter(function(profissional) {
+
+            return profissional.servico
+                .toLowerCase()
+                .includes(texto);
+
+        });
+
+
+    document.getElementById("inicio")
+        .style.display = "none";
+
+    document.getElementById("resultados")
+        .style.display = "block";
+
+
+    if (encontrados.length === 0) {
+
+        lista.innerHTML = `
+            <div class="vazio">
+                😕 Nenhum profissional encontrado.
+                <br><br>
+                Tente outro serviço.
+            </div>
+        `;
+
+        return;
+    }
+
+
+    encontrados.forEach(function(profissional) {
+
+        lista.innerHTML += `
+
+            <div class="profissional">
+
+                <h3>
+                    👤 ${profissional.nome}
+                </h3>
+
+                <div class="info">
+                    🛠️ ${profissional.servico}
+                </div>
+
+                <div class="info">
+                    ⭐ ${profissional.avaliacao || "Novo"}
+                </div>
+
+                <div class="info">
+                    📍 ${profissional.distancia || profissional.cidade || "Região não informada"}
+                </div>
+
+                <div class="preco">
+                    💰 A partir de R$ ${profissional.preco}
+                </div>
+
+                <button
+                    class="contato"
+                    onclick="contatar('${profissional.telefone}')">
+
+                    📱 Entrar em contato
+
+                </button>
+
+            </div>
+
+        `;
+
+    });
+
+}
+
+
+function abrirCadastro() {
+
+    document.getElementById("inicio")
+        .style.display = "none";
+
+    document.getElementById("cadastro")
+        .style.display = "block";
+
+}
+
+
+async function cadastrar() {
+
+    const nome = document.getElementById("nome").value.trim();
+    const servico = document.getElementById("servico").value;
+    const cidade = document.getElementById("cidade").value.trim();
+    const preco = document.getElementById("preco").value;
+    const telefone = document.getElementById("telefone").value.trim();
+    const descricao = document.getElementById("descricao").value.trim();
+
+    if (
+        nome === "" ||
+        servico === "" ||
+        cidade === "" ||
+        preco === "" ||
+        telefone === ""
+    ) {
+        alert("Preencha todos os campos obrigatórios.");
+        return;
+    }
+
+    const dados = new URLSearchParams();
+
+    dados.append("nome", nome);
+    dados.append("servico", servico);
+    dados.append("cidade", cidade);
+    dados.append("preco", preco);
+    dados.append("telefone", telefone);
+    dados.append("descricao", descricao);
+
+    try {
+        const resposta = await fetch("/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: dados
+        });
+
+        if (!resposta.ok) {
+            throw new Error("Erro ao cadastrar.");
+        }
+
+        document.getElementById("sucesso").style.display = "block";
+
+        document.getElementById("nome").value = "";
+        document.getElementById("servico").value = "";
+        document.getElementById("cidade").value = "";
+        document.getElementById("preco").value = "";
+        document.getElementById("telefone").value = "";
+        document.getElementById("descricao").value = "";
+
+    } catch (erro) {
+        alert("Não foi possível cadastrar. Tente novamente.");
+        console.error(erro);
+    }
+}
+
+function contatar(numero) {
+
+    window.location.href =
+        "https://wa.me/" + numero;
+
+}
+
+
+function voltarInicio() {
+
+    document.getElementById("inicio")
+        .style.display = "block";
+
+    document.getElementById("resultados")
+        .style.display = "none";
+
+    document.getElementById("cadastro")
+        .style.display = "none";
+
+    document.getElementById("sucesso")
+        .style.display = "none";
+
+}
+
+</script>
+
+</body>
+</html>

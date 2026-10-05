@@ -1,0 +1,7 @@
+banco.db
+app_backup.py
+app_busca_backup.py
+app_antes_json.py
+app_pre_publicacao.py
+__pycache__/
+*.pyc
