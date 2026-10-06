@@ -11,6 +11,7 @@ CREATE TABLE IF NOT EXISTS profissionais (
     cidade TEXT,
     descricao TEXT,
     preco REAL,
+    usuario_id INTEGER,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 """)
