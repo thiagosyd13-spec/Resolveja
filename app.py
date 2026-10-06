@@ -333,10 +333,18 @@ def minha_conta():
     if "usuario_id" not in session:
         return redirect("/login")
 
+    conn = conectar_banco()
+    profissional = conn.execute(
+        "SELECT * FROM profissionais WHERE usuario_id=? ORDER BY id DESC LIMIT 1",
+        (session["usuario_id"],)
+    ).fetchone()
+    conn.close()
+
     return render_template(
         "minha_conta.html",
         nome=session.get("usuario_nome"),
-        email=session.get("usuario_email")
+        email=session.get("usuario_email"),
+        profissional=dict(profissional) if profissional else None
     )
 
 

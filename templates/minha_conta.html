@@ -95,6 +95,11 @@
             border: none;
         }
 
+        .editar {
+            background: #2563eb;
+            color: white;
+        }
+
         .voltar {
             background: #111827;
             color: white;
@@ -138,6 +143,12 @@
             </div>
 
             <div class="botoes">
+
+                {% if profissional %}
+                <a href="/editar-profissional/{{ profissional.id }}" class="botao editar">
+                    ✏️ Editar meu anúncio
+                </a>
+                {% endif %}
 
                 <a href="/" class="botao voltar">
                     🏠 Voltar para o início
