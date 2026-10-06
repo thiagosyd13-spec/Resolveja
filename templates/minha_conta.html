@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Minha conta - ResolveJá</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            color: #222;
+        }
+
+        .topo {
+            background: #111827;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .topo h2 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .avatar {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            background: #e5e7eb;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 45px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .info {
+            background: #f3f4f6;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+        }
+
+        .info strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #374151;
+        }
+
+        .botoes {
+            margin-top: 25px;
+        }
+
+        .botao {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            margin-top: 12px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            border: none;
+        }
+
+        .voltar {
+            background: #111827;
+            color: white;
+        }
+
+        .sair {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="topo">
+        <h2>ResolveJá</h2>
+    </div>
+
+    <div class="container">
+
+        <div class="card">
+
+            <div class="avatar">
+                👤
+            </div>
+
+            <h1>{{ nome }}</h1>
+
+            <div class="subtitulo">
+                Minha conta
+            </div>
+
+            <div class="info">
+                <strong>Nome</strong>
+                {{ nome }}
+            </div>
+
+            <div class="info">
+                <strong>E-mail</strong>
+                {{ email }}
+            </div>
+
+            <div class="botoes">
+
+                <a href="/" class="botao voltar">
+                    🏠 Voltar para o início
+                </a>
+
+                <a href="/sair" class="botao sair">
+                    🚪 Sair da conta
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

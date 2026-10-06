@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar conta - ResolveJá</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            color: #222;
+        }
+
+        .topo {
+            background: #111827;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 450px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px;
+            margin: 8px 0 15px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 8px;
+            background: #111827;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="topo">
+        <h2>ResolveJá</h2>
+    </div>
+
+    <div class="container">
+        <div class="card">
+
+            <h1>Criar conta</h1>
+
+            <form method="POST">
+
+                <label>Nome</label>
+                <input type="text" name="nome" required>
+
+                <label>Telefone</label>
+                <input type="tel" name="telefone">
+
+                <label>E-mail</label>
+                <input type="email" name="email" required>
+
+                <label>Senha</label>
+                <input type="password" name="senha" required>
+
+                <button type="submit">
+                    Criar minha conta
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+
+</body>
+</html>
