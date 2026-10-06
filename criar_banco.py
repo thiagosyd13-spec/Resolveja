@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS usuarios (
     telefone TEXT,
     email TEXT UNIQUE NOT NULL,
     senha TEXT NOT NULL,
+    email_verificado INTEGER DEFAULT 0,
     tipo TEXT NOT NULL DEFAULT 'cliente',
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
