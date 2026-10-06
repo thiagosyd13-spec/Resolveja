@@ -11,6 +11,10 @@ app.secret_key = os.environ.get("SECRET_KEY", "resolveja-chave-secreta-2026")
 
 from criar_banco import *
 
+conn_debug = sqlite3.connect("banco.db")
+print("=== PROFISSIONAIS NO RENDER ===", conn_debug.execute("SELECT COUNT(*) FROM profissionais").fetchone()[0])
+conn_debug.close()
+
 
 def conectar_banco():
     conn = sqlite3.connect("banco.db")
