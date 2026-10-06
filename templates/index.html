@@ -382,6 +382,13 @@ function buscar() {
                 </div>
 
                 <button
+                    onclick="abrirPerfil('${profissional.id}')">
+
+                    👤 Ver perfil
+
+                </button>
+
+                <button
                     class="contato"
                     onclick="contatar('${profissional.telefone}')">
 
@@ -397,6 +404,10 @@ function buscar() {
 
 }
 
+
+function abrirPerfil(id) {
+    window.location.href = "/profissional/" + id;
+}
 
 function abrirCadastro() {
 

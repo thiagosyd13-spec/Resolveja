@@ -10,12 +10,25 @@ def conectar_banco():
     conn.row_factory = sqlite3.Row
     return conn
 
+
 @app.route("/")
 def inicio():
     conn = conectar_banco()
-    profissionais = [dict(row) for row in conn.execute("SELECT * FROM profissionais ORDER BY id DESC").fetchall()]
+
+    profissionais = [
+        dict(row)
+        for row in conn.execute(
+            "SELECT * FROM profissionais ORDER BY id DESC"
+        ).fetchall()
+    ]
+
     conn.close()
-    return render_template("index.html", profissionais=profissionais)
+
+    return render_template(
+        "index.html",
+        profissionais=profissionais
+    )
+
 
 @app.route("/cadastrar", methods=["POST"])
 def cadastrar():
@@ -32,7 +45,14 @@ def cadastrar():
         INSERT INTO profissionais
         (nome, servico, telefone, cidade, descricao, preco)
         VALUES (?, ?, ?, ?, ?, ?)
-    """, (nome, servico, telefone, cidade, descricao, preco))
+    """, (
+        nome,
+        servico,
+        telefone,
+        cidade,
+        descricao,
+        preco
+    ))
 
     conn.commit()
     conn.close()
@@ -43,9 +63,45 @@ def cadastrar():
 @app.route("/profissionais")
 def profissionais():
     conn = conectar_banco()
-    lista = [dict(row) for row in conn.execute("SELECT * FROM profissionais ORDER BY id DESC").fetchall()]
+
+    lista = [
+        dict(row)
+        for row in conn.execute(
+            "SELECT * FROM profissionais ORDER BY id DESC"
+        ).fetchall()
+    ]
+
     conn.close()
-    return render_template("index.html", profissionais=lista)
+
+    return render_template(
+        "index.html",
+        profissionais=lista
+    )
+
+
+@app.route("/profissional/<int:id>")
+def perfil_profissional(id):
+    conn = conectar_banco()
+
+    profissional = conn.execute(
+        "SELECT * FROM profissionais WHERE id = ?",
+        (id,)
+    ).fetchone()
+
+    conn.close()
+
+    if profissional is None:
+        return "Profissional não encontrado", 404
+
+    return render_template(
+        "perfil.html",
+        profissional=dict(profissional)
+    )
+
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080, debug=False)
+    app.run(
+        host="0.0.0.0",
+        port=8080,
+        debug=False
+    )
