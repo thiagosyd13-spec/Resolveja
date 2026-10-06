@@ -15,6 +15,18 @@ CREATE TABLE IF NOT EXISTS profissionais (
 )
 """)
 
+conn.execute("""
+CREATE TABLE IF NOT EXISTS usuarios (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nome TEXT NOT NULL,
+    telefone TEXT,
+    email TEXT UNIQUE NOT NULL,
+    senha TEXT NOT NULL,
+    tipo TEXT NOT NULL DEFAULT 'cliente',
+    criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+""")
+
 conn.commit()
 conn.close()
 
