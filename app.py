@@ -218,7 +218,8 @@ def criar_conta():
 
         try:
             enviar_email_verificacao(email, nome, token)
-        except Exception:
+        except Exception as e:
+            print(f"ERRO AO ENVIAR EMAIL: {e}")
             conn = conectar_banco()
             conn.execute(
                 "DELETE FROM verificacoes_email WHERE usuario_id = ?",
