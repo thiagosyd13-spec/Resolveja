@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS profissionais (
     telefone TEXT,
     cidade TEXT,
     descricao TEXT,
+    preco REAL,
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 )
 """)
