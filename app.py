@@ -340,6 +340,53 @@ def minha_conta():
     )
 
 
+@app.route("/editar-profissional/<int:id>", methods=["GET", "POST"])
+def editar_profissional(id):
+    if "usuario_id" not in session:
+        return redirect("/login")
+
+    conn = conectar_banco()
+
+    profissional = conn.execute(
+        "SELECT * FROM profissionais WHERE id=? AND usuario_id=?",
+        (id, session["usuario_id"])
+    ).fetchone()
+
+    if profissional is None:
+        conn.close()
+        return "Você não tem permissão para editar este anúncio.", 403
+
+    if request.method == "POST":
+        nome = request.form["nome"]
+        servico = request.form["servico"]
+        telefone = request.form.get("telefone", "")
+        cidade = request.form.get("cidade", "")
+        descricao = request.form.get("descricao", "")
+        preco = request.form.get("preco", "")
+
+        conn.execute("""
+            UPDATE profissionais
+            SET nome=?, servico=?, telefone=?, cidade=?, descricao=?, preco=?
+            WHERE id=? AND usuario_id=?
+        """, (
+            nome,
+            servico,
+            telefone,
+            cidade,
+            descricao,
+            preco,
+            id,
+            session["usuario_id"]
+        ))
+
+        conn.commit()
+        conn.close()
+        return redirect(f"/profissional/{id}")
+
+    conn.close()
+    return render_template("editar_profissional.html", profissional=dict(profissional))
+
+
 @app.route("/sair")
 def sair():
     session.clear()
