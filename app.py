@@ -97,20 +97,22 @@ def cadastrar():
     cidade = request.form.get("cidade", "")
     descricao = request.form.get("descricao", "")
     preco = request.form.get("preco", "")
+    usuario_id = session.get("usuario_id")
 
     conn = conectar_banco()
 
     conn.execute("""
         INSERT INTO profissionais
-        (nome, servico, telefone, cidade, descricao, preco)
-        VALUES (?, ?, ?, ?, ?, ?)
+        (nome, servico, telefone, cidade, descricao, preco, usuario_id)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
     """, (
         nome,
         servico,
         telefone,
         cidade,
         descricao,
-        preco
+        preco,
+        usuario_id
     ))
 
     conn.commit()
